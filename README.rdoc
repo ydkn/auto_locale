@@ -1,0 +1,17 @@
+= AutoLocale
+
+Automatically set the locale from the browsers HTTP_ACCEPT_LANGUAGE header.
+
+
+== Installation
+
+Add the dependency to the Gemfile of your application:
+
+  gem "auto_locale"
+
+Then call <tt>bundle install</tt> on your console.
+
+
+== Copyright
+
+Copyright (c) 2011 Florian Schwab. See LICENSE for details.
