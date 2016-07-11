@@ -15,26 +15,25 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-require "auto_locale/version"
+require 'auto_locale/version'
 
 module AutoLocale
-  
-  def self.included base
-    base.before_filter :set_auto_locale
+  def self.included(base)
+    base.before_action :set_auto_locale
   end
-  
+
   def set_auto_locale
-    available_locales = I18n.available_locales.collect{|l| l.to_s}
-    
-    locales = request.accept_language.split(/\s*,\s*/).collect do |l|
+    available_locales = I18n.available_locales.map(&:to_s)
+
+    locales = request.accept_language.split(/\s*,\s*/).map do |l|
       l += ';q=1.0' unless l =~ /;q=\d+\.\d+$/
       l.split(';q=')
     end.sort do |a, b|
       b.last.to_f <=> a.last.to_f
-    end.collect do |l|
-      l.first.downcase.gsub(/-[a-z]+$/i) {|c| c.upcase}
+    end.map do |l|
+      l.first.downcase.gsub(/-[a-z]+$/i) { |c| c.upcase }
     end
-    
+
     locales.each do |l|
       available_locales.each do |al|
         if l == al
@@ -49,7 +48,6 @@ module AutoLocale
   rescue
     I18n.locale = I18n.default_locale
   end
-  
 end
 
 ActionController::Base.send :include, AutoLocale

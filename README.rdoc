@@ -14,4 +14,4 @@ Then call <tt>bundle install</tt> on your console.
 
 == Copyright
 
-Copyright (c) 2011 Florian Schwab. See LICENSE for details.
+Copyright (c) 2011-2016 Florian Schwab. See LICENSE for details.
